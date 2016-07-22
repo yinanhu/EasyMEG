@@ -62,43 +62,38 @@ guidata(hObject, handles);
 % uiwait(handles.figure1);
 
 % ResizeFonts - get 'position'
-pos=get(gcf,'position');
-KD_Old=pos(3);
-GD_Old=pos(4);
-handles.KD_Old=KD_Old;
-handles.GD_Old=GD_Old;
+% pos=get(gcf,'position');
+% KD_Old=pos(3);
+% GD_Old=pos(4);
+% handles.KD_Old=KD_Old;
+% handles.GD_Old=GD_Old;
 
-% Show logo.png
-% axes(handles.axesLogo);
-% logo=imread('logo.png');
-% imshow(logo);
 setLogo(handles);
-s = {'An easy-to-use';'software for MEG analysis'};
-set(findobj('tag','txtLogo'), 'string', s);
+set(handles.txtLogo, 'string', {'An easy-to-use';'software for MEG analysis'});
 
 % --- Executes when figure1 is resized.
 function figure1_SizeChangedFcn(hObject, eventdata, handles)
 % hObject    handle to figure1 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-if isfield(handles,'KD_Old')&&isfield(handles,'GD_Old')
-KD_Old=handles.KD_Old;
-GD_Old=handles.GD_Old; 
-pos=get(gcf,'position');     
-KD_New=pos(3);  
-GD_New=pos(4);  
-if(KD_Old~=KD_New||GD_Old~=GD_New)
-    k=KD_New*GD_New/KD_Old/GD_Old;
-    KD_Old=KD_New;
-    GD_Old=GD_New;
-    k1=get(handles.text33,'FontSize');
-    set(handles.text33,'FontSize',k1*k);
-    set(handles.pushbutton1,'FontSize',k1*k);
-    handles.KD_Old=KD_Old;
-    handles.GD_Old=GD_Old;  
-end;
-end;
-guidata(hObject, handles);
+% if isfield(handles,'KD_Old')&&isfield(handles,'GD_Old')
+% KD_Old=handles.KD_Old;
+% GD_Old=handles.GD_Old; 
+% pos=get(gcf,'position');     
+% KD_New=pos(3);  
+% GD_New=pos(4);  
+%     if(KD_Old~=KD_New||GD_Old~=GD_New)
+%         k=KD_New*GD_New/KD_Old/GD_Old;
+%         KD_Old=KD_New;
+%         GD_Old=GD_New;
+%         k1=get(handles.text33,'FontSize');
+%         set(handles.text33,'FontSize',k1*k);
+%         set(handles.pushbutton1,'FontSize',k1*k);
+%         handles.KD_Old=KD_Old;
+%         handles.GD_Old=GD_Old;  
+%     end;
+% end;
+% guidata(hObject, handles);
 
 
 % --- Outputs from this function are returned to the command line.
@@ -125,6 +120,7 @@ function btnPreprocessing_Callback(hObject, eventdata, handles)
 % hObject    handle to btnPreprocessing (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+run('Preprocessing');
 
 
 % --- Executes on button press in btnSenAnalysis.
