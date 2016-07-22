@@ -22,7 +22,7 @@ function varargout = Preprocessing(varargin)
 
 % Edit the above text to modify the response to help Preprocessing
 
-% Last Modified by GUIDE v2.5 14-Jul-2016 21:25:03
+% Last Modified by GUIDE v2.5 22-Jul-2016 11:47:21
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -59,7 +59,7 @@ handles.output = hObject;
 guidata(hObject, handles);
 
 % UIWAIT makes Preprocessing wait for user response (see UIRESUME)
-% uiwait(handles.figure1);
+% uiwait(handles.figPreprocessing);
 
 
 % --- Outputs from this function are returned to the command line.
@@ -81,6 +81,33 @@ function popMenuPreproc_Callback(hObject, eventdata, handles)
 
 % Hints: contents = cellstr(get(hObject,'String')) returns popMenuPreproc contents as cell array
 %        contents{get(hObject,'Value')} returns selected item from popMenuPreproc
+funcID = get(hObject,'Value');
+global flagFuncID;
+if(flagFuncID~=funcID)
+    switch(flagFuncID)
+        case 1
+            close('VisualArtifactDetection');
+        case 2
+            disp('2');
+        case 3
+            disp('3');
+    end
+        
+    switch(funcID)
+        case 1
+            run('VisualArtifactDetection');
+        case 2
+            disp('2');
+        case 3
+            disp('3');
+    end
+    flagFuncID = funcID;
+end
+
+
+        
+
+
 
 
 % --- Executes during object creation, after setting all properties.
@@ -94,23 +121,7 @@ function popMenuPreproc_CreateFcn(hObject, eventdata, handles)
 if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor','white');
 end
+run('VisualArtifactDetection');
+global flagFuncID;
+flagFuncID = 1;
 
-
-% --- Executes on button press in btnRun.
-function btnRun_Callback(hObject, eventdata, handles)
-% hObject    handle to btnRun (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-popVal=get(handles.popMenuPreproc,'Value');
-switch(popVal)
-    case 1
-        run('VisualArtifactDetection');
-end
-
-
-% --- Executes on button press in btnCancel.
-function btnCancel_Callback(hObject, eventdata, handles)
-% hObject    handle to btnCancel (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-close;

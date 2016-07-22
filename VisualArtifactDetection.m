@@ -22,7 +22,7 @@ function varargout = VisualArtifactDetection(varargin)
 
 % Edit the above text to modify the response to help VisualArtifactDetection
 
-% Last Modified by GUIDE v2.5 14-Jul-2016 22:12:51
+% Last Modified by GUIDE v2.5 22-Jul-2016 11:47:20
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -59,7 +59,7 @@ handles.output = hObject;
 guidata(hObject, handles);
 
 % UIWAIT makes VisualArtifactDetection wait for user response (see UIRESUME)
-% uiwait(handles.figure1);
+% uiwait(handles.figVisualArtDetec);
 
 
 % --- Outputs from this function are returned to the command line.

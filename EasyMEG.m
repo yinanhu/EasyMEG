@@ -22,7 +22,7 @@ function varargout = EasyMEG(varargin)
 
 % Edit the above text to modify the response to help EasyMEG
 
-% Last Modified by GUIDE v2.5 13-Jul-2016 23:24:23
+% Last Modified by GUIDE v2.5 22-Jul-2016 11:47:23
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -59,7 +59,7 @@ handles.output = hObject;
 guidata(hObject, handles);
 
 % UIWAIT makes EasyMEG wait for user response (see UIRESUME)
-% uiwait(handles.figure1);
+% uiwait(handles.figMain);
 
 % ResizeFonts - get 'position'
 % pos=get(gcf,'position');
@@ -69,11 +69,10 @@ guidata(hObject, handles);
 % handles.GD_Old=GD_Old;
 
 setLogo(handles);
-set(handles.txtLogo, 'string', {'An easy-to-use';'software for MEG analysis'});
 
-% --- Executes when figure1 is resized.
-function figure1_SizeChangedFcn(hObject, eventdata, handles)
-% hObject    handle to figure1 (see GCBO)
+% --- Executes when figMain is resized.
+function figMain_SizeChangedFcn(hObject, eventdata, handles)
+% hObject    handle to figMain (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 % if isfield(handles,'KD_Old')&&isfield(handles,'GD_Old')
@@ -105,15 +104,6 @@ function varargout = EasyMEG_OutputFcn(hObject, eventdata, handles)
 
 % Get default command line output from handles structure
 varargout{1} = handles.output;
-
-
-% --- Executes on button press in btnLogo.
-function btnLogo_Callback(hObject, eventdata, handles)
-% hObject    handle to btnLogo (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-web('http://easymeg.github.io/','-browser');
-
 
 % --- Executes on button press in btnPreprocessing.
 function btnPreprocessing_Callback(hObject, eventdata, handles)
@@ -167,6 +157,15 @@ function txtAbout_ButtonDownFcn(hObject, eventdata, handles)
 web('mailto:nn.zach@gmail.com','-browser');
 
 function setLogo(handles)
+axes(handles.axesLogo);
 logo=imread('logo.png');
+imshow(logo);
 
-set(handles.btnLogo,'CData',logo);
+
+% --- If Enable == 'on', executes on mouse press in 5 pixel border.
+% --- Otherwise, executes on mouse press in 5 pixel border or over txtLogo.
+function txtLogo_ButtonDownFcn(hObject, eventdata, handles)
+% hObject    handle to txtLogo (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+web('https://easymeg.github.io/','-browser');
