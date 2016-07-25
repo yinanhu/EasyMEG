@@ -60,6 +60,8 @@ guidata(hObject, handles);
 
 % UIWAIT makes Preprocessing wait for user response (see UIRESUME)
 % uiwait(handles.figPreprocessing);
+set(handles.editOut,'Enable','off');
+set(handles.btnBrowserOut,'Enable','off');
 
 
 % --- Outputs from this function are returned to the command line.
@@ -235,6 +237,32 @@ function btnOk_Callback(hObject, eventdata, handles)
 % hObject    handle to btnOk (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+isFData = get(handles.rbtnFData,'value');
+if (isFData)
+    dataDir = get(handles.editFData,'string');
+else
+    dataDir = get(handles.editRData,'string');
+end
+outDir = get(handles.editOut,'string');
+
+switch(get(handles.popPreprocessing,'Value'))
+    case 1
+        disp('Browse Raw Data Without Processing');
+        BrowseData(handles,isFData,dataDir);
+        close;
+    case 2
+        disp('Trigger Based Trial Selection');
+        % TrialSelection(isFData,dataDir,outDir);
+    case 3
+        disp('Segment Continuous Data Into Pieces');
+        % SegmentData(isFData,dataDir,outDir);
+    case 4
+        disp('Automatic Artifact Detection');
+        % ArtifactDetection(isFData,dataDir,outDir);
+    case 5
+        disp('Visual Artifact Detection');
+        % VisualInspect(isFData,dataDir,outDir);
+end
 
 
 % --- Executes on button press in btnCancel.
@@ -252,20 +280,8 @@ function popPreprocessing_Callback(hObject, eventdata, handles)
 
 % Hints: contents = cellstr(get(hObject,'String')) returns popPreprocessing contents as cell array
 %        contents{get(hObject,'Value')} returns selected item from popPreprocessing
-if (get(hObject,'Value')==2)
     
-    set(handles.rbtnFData,'Value',0);
-    set(handles.rbtnRData,'Value',1);
-    set(handles.rbtnFData,'Enable','off');
-    set(handles.rbtnRData,'Enable','off');
-
-    set(handles.editFData,'Enable','off');
-    set(handles.btnBrowserFData,'Enable','off');
-
-    set(handles.editRData,'Enable','on');
-    set(handles.btnBrowserRData,'Enable','on');
-    
-elseif (get(hObject,'Value')==1)
+if (get(hObject,'Value')==1)
     set(handles.rbtnFData,'Enable','on');
     set(handles.rbtnRData,'Enable','on');
     set(handles.editOut,'Enable','off');
