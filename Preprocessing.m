@@ -249,19 +249,29 @@ switch(get(handles.popPreprocessing,'Value'))
     case 1
         disp('Browse Raw Data Without Processing');
         BrowseData(handles,isFData,dataDir);
-        close;
+        
     case 2
         disp('Trigger Based Trial Selection');
-        % TrialSelection(isFData,dataDir,outDir);
+        TrialSelection(handles,isFData,dataDir,outDir);
+        
     case 3
         disp('Segment Continuous Data Into Pieces');
-        % SegmentData(isFData,dataDir,outDir);
+%         % subHandle = SegmentData(handles,isFData,dataDir,outDir);
+%         if ishandle(subHandle)
+%             close(subHandle);
+%         end
     case 4
         disp('Automatic Artifact Detection');
-        % ArtifactDetection(isFData,dataDir,outDir);
+        % subHandle = ArtifactDetection(handles,isFData,dataDir,outDir);
+%         if ishandle(subHandle)
+%             close(subHandle);
+%         end
     case 5
         disp('Visual Artifact Detection');
-        % VisualInspect(isFData,dataDir,outDir);
+        % subHandle = VisualInspect(handles,isFData,dataDir,outDir);
+%         if ishandle(subHandle)
+%             close(subHandle);
+%         end
 end
 
 
@@ -283,12 +293,34 @@ function popPreprocessing_Callback(hObject, eventdata, handles)
     
 if (get(hObject,'Value')==1)
     set(handles.rbtnFData,'Enable','on');
-    set(handles.rbtnRData,'Enable','on');
+    set(handles.rbtnFData,'Enable','on');
+    set(handles.btnBrowserFData,'Enable','on');
+    set(handles.editRData,'Enable','on');
+    set(handles.editRData,'Enable','on');
+    set(handles.btnBrowserRData,'Enable','on');
     set(handles.editOut,'Enable','off');
     set(handles.btnBrowserOut,'Enable','off');
+elseif (get(hObject,'Value')==2)
+    set(handles.rbtnFData,'Enable','off');
+    set(handles.rbtnFData,'Value',0);
+    set(handles.editFData,'Enable','off');
+    set(handles.btnBrowserFData,'Enable','off');
+    
+    set(handles.rbtnRData,'Enable','off');
+    set(handles.rbtnRData,'Value',1);
+    set(handles.editRData,'Enable','on');
+    set(handles.btnBrowserRData,'Enable','on');
+    
+    
+    set(handles.editOut,'Enable','on');
+    set(handles.btnBrowserOut,'Enable','on');
 else
     set(handles.rbtnFData,'Enable','on');
-    set(handles.rbtnRData,'Enable','on');
+    set(handles.rbtnFData,'Enable','on');
+    set(handles.btnBrowserFData,'Enable','on');
+    set(handles.editRData,'Enable','on');
+    set(handles.editRData,'Enable','on');
+    set(handles.btnBrowserRData,'Enable','on');
     set(handles.editOut,'Enable','on');
     set(handles.btnBrowserOut,'Enable','on');
 end

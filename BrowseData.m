@@ -22,7 +22,7 @@ function varargout = BrowseData(varargin)
 
 % Edit the above text to modify the response to help BrowseData
 
-% Last Modified by GUIDE v2.5 28-Jul-2016 16:21:35
+% Last Modified by GUIDE v2.5 29-Jul-2016 17:49:10
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -73,6 +73,9 @@ function varargout = BrowseData_OutputFcn(hObject, eventdata, handles)
 
 % Get default command line output from handles structure
 varargout{1} = handles.output;
+
+delete(handles.figure1);
+
 
 
 % --- Executes on button press in rbtnContinuousYes.
@@ -422,6 +425,7 @@ else
     eval(['ft_databrowser(cfg,',dataName.name,');']);
 end
 uiresume(handles.figure1);
+close;
 
 % --- Executes on button press in btnCancel.
 function btnCancel_Callback(hObject, eventdata, handles)
@@ -429,6 +433,7 @@ function btnCancel_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 uiresume(handles.figure1);
+close;
 
 
 % --- Executes on button press in checkboxPassBand.
@@ -502,3 +507,13 @@ function checkboxDFT_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 
 % Hint: get(hObject,'Value') returns toggle state of checkboxDFT
+
+
+% --- Executes when user attempts to close figure1.
+function figure1_CloseRequestFcn(hObject, eventdata, handles)
+% hObject    handle to figure1 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hint: delete(hObject) closes the figure
+uiresume(handles.figure1);
